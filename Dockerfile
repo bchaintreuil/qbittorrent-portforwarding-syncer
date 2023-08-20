@@ -5,7 +5,7 @@ WORKDIR /usr/src/app
 COPY . .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY crontab /etc/crontabs/root
+COPY crontabs /etc/crontabs/root
 RUN chown root:root /etc/crontabs/root && chmod 600 /etc/crontabs/root
 
 ENV GLUETUN_HOSTNAME=gluetun
