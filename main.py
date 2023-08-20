@@ -30,8 +30,6 @@ def main():
         # display qBittorrent info
         print(f"qBittorrent: {qbt_client.app.version}")
         print(f"qBittorrent Web API: {qbt_client.app.web_api_version}")
-        for k, v in qbt_client.app.build_info.items():
-            print(f"{k}: {v}")
 
         qbittorrent_fwport = qbt_client.app_preferences()["listen_port"]
         print("qBittorrent assigned forwarding port: " + str(qbittorrent_fwport))
