@@ -25,6 +25,10 @@ def main():
         print("Gluetun connection error!")
         exit(1)
 
+    if gluetun_fwport == 0:
+        print("Seems like there is some issue on Gluetun's side, nothing to do...")
+        exit(0)
+
     # We retrieve the qBittorrent set up one
     with qbittorrentapi.Client(host=qbittorrent_hostname, port=qbittorrent_port, username=qbittorrent_user, password=qbittorrent_pwd) as qbt_client:
         # display qBittorrent info
