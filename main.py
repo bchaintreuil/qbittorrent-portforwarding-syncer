@@ -15,11 +15,12 @@ def main():
         qbittorrent_pwd = os.getenv('QBITTORRENT_PWD', "adminadmin") # qBittorrent default values
     except KeyError:
         print("One or more mandatory environment variables doesn't exist")
+        exit(1)
     
     # First we retrieve the assigned forwarding port from Gluetun using the control server
     try:
         gluetun_fwport = requests.get(url="http://{}:{}/v1/openvpn/portforwarded".format(gluetun_hostname, gluetun_port)).json()["port"]
-        print("Gluetun assigned forwarding port: " + gluetun_fwport)
+        print("Gluetun assigned forwarding port: " + str(gluetun_fwport))
     except requests.exceptions.RequestException as e:
         print("Gluetun connection error!")
         exit(1)
@@ -33,6 +34,7 @@ def main():
             print(f"{k}: {v}")
 
         qbittorrent_fwport = qbt_client.app_preferences()["listen_port"]
+        print("qBittorrent assigned forwarding port: " + str(qbittorrent_fwport))
 
         if qbittorrent_fwport != gluetun_fwport:
             print("Gluetun & qBittorrent ports are differents, setting up new port accordingly")
